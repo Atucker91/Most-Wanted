@@ -10,13 +10,14 @@
 function app(people) {
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
+
   switch (searchType) {
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
       // TODO: search by traits 
-      searchResults = searchByOccupation(people);
+      //searchResults = searchByOccupation(people);
       break;
     default:
       app(people); // restart app
@@ -26,6 +27,52 @@ function app(people) {
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
+
+
+function traitToSearchBy(people) {
+  let searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
+  let foundPeople;
+  let foundPeopleObjectsArray;
+  let count = 0;
+
+  while (searchType != "Done" || count == 5) {
+
+    switch (searchType) {
+      case 'Gender':
+        foundPeople = searchByGender(people);
+        break;
+      case 'DOB':
+
+        break;
+      case 'Height':
+        foundPeople = searchByHeight(people);
+        break;
+      case 'Weight':
+        foundPeople = searchByWeight(people);
+        break;
+      case 'Eye Color':
+        foundPeople = searchByEyeColor(people);
+        break;
+      case 'Occupation':
+        foundPeople = searchByOccupation(people);
+        break;
+      case 'Parents':
+        break;
+      case 'Current Spouse':
+        break;
+
+      default:
+        traitToSearchBy(people); // restart app
+        break;
+    }
+    searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
+    count++;
+    foundPeopleObjectsArray += foundPeople;
+
+  }
+}
+
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
@@ -80,7 +127,7 @@ function searchByName(people) {
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return displayPerson(foundPerson);
+  return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -95,7 +142,7 @@ function searchByEyeColor(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 
 }
 
@@ -110,7 +157,7 @@ function searchByGender(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 
 }
 
@@ -124,7 +171,7 @@ function searchByHeight(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 
 function searchByWeight(people) {
@@ -137,7 +184,7 @@ function searchByWeight(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 
 function searchByOccupation(people) {
@@ -150,7 +197,7 @@ function searchByOccupation(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 //TODO: add other trait filter functions here.
 
@@ -166,7 +213,7 @@ function searchByOccupation(people) {
 // alerts a list of people
 function displayPeople(people) {
   alert(people.map(function (person) {
-    return person[0].firstName + " " + person[0].lastName;
+    return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
 
