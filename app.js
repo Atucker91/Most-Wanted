@@ -40,7 +40,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      console.log(person); // TODO: get person's info
+      console.log(person);
       break;
     case "family":
       // TODO: get person's family
