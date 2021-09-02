@@ -15,7 +15,8 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      // TODO: search by traits 
+      searchResults = searchByOccupation(people);
       break;
     default:
       app(people); // restart app
@@ -79,14 +80,78 @@ function searchByName(people) {
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return displayPerson(foundPerson);
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people) {
-
+  let eyeColor = promptFor("What is the person's eye color?", autoValid);
+  
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor === eyeColor){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return displayPeople(foundPerson);
+  
 }
 
+function searchByGender(people){
+  let gender = promptFor("What is the person's gender?", autoValid);
+
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === gender){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return displayPeople(foundPerson);
+  
+}
+
+function searchByHeight(people){
+  let height = promptFor("What is the person's height?", autoValid);
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.height === height){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return displayPeople(foundPerson);
+}
+
+function searchByWeight(people){
+  let weight = promptFor("How much does the person weigh?", autoValid);
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.weight === weight){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return displayPeople(foundPerson);
+}
+
+function searchByOccupation(people){
+  let occupation = promptFor("What does the person do for a living?", autoValid);
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.occupation === occupation){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return displayPeople(foundPerson);
+}
 //TODO: add other trait filter functions here.
 
 
@@ -160,3 +225,5 @@ function customValidation(input) {
 }
 
 //#endregion
+
+
