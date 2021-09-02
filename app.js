@@ -69,7 +69,7 @@ function traitToSearchBy(people) {
     count++;
     foundPeopleObjectsArray += foundPeople;
 
-  }
+  } 
 }
 
 
@@ -127,7 +127,7 @@ function searchByName(people) {
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return displayPerson(foundPerson);
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -142,7 +142,7 @@ function searchByEyeColor(people) {
       return false;
     }
   });
-  return foundPerson;
+  return displayPeople(foundPerson);
 
 }
 
@@ -157,7 +157,7 @@ function searchByGender(people) {
       return false;
     }
   });
-  return foundPerson;
+  return displayPeople(foundPerson);
 
 }
 
@@ -171,7 +171,7 @@ function searchByHeight(people) {
       return false;
     }
   });
-  return foundPerson;
+  return displayPeople(foundPerson);
 }
 
 function searchByWeight(people) {
@@ -184,7 +184,7 @@ function searchByWeight(people) {
       return false;
     }
   });
-  return foundPerson;
+  return displayPeople(foundPerson);
 }
 
 function searchByOccupation(people) {
@@ -197,7 +197,7 @@ function searchByOccupation(people) {
       return false;
     }
   });
-  return foundPerson;
+  return displayPeople(foundPerson);
 }
 //TODO: add other trait filter functions here.
 
