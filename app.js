@@ -17,6 +17,10 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
+<<<<<<< HEAD
+=======
+      // TODO: search by traits 
+>>>>>>> 1f4e81dcc5a14a08d5607f6dfa4a12b8f12d75ba
       searchResults = traitToSearchBy(people);
       break;
     default:
