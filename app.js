@@ -17,7 +17,7 @@ function app(people) {
       break;
     case 'no':
       // TODO: search by traits 
-      //searchResults = searchByOccupation(people);
+      searchResults = traitToSearchBy(people);
       break;
     default:
       app(people); // restart app
