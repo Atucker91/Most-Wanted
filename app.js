@@ -71,6 +71,9 @@ function traitToSearchBy(people) {
     searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
 
   } 
+
+  displayPeople(foundPeople);
+  
 }
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
@@ -140,7 +143,7 @@ function searchByEyeColor(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 
 }
 
@@ -155,7 +158,7 @@ function searchByGender(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 
 }
 
@@ -169,7 +172,7 @@ function searchByHeight(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 
 function searchByWeight(people) {
@@ -182,7 +185,7 @@ function searchByWeight(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 
 function searchByOccupation(people) {
@@ -195,7 +198,7 @@ function searchByOccupation(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 //TODO: add other trait filter functions here.
 
