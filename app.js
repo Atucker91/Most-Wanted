@@ -11,13 +11,13 @@ function app(people) {
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
 
+
   switch (searchType) {
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits 
-      //searchResults = searchByOccupation(people);
+      searchResults = traitToSearchBy(people);
       break;
     default:
       app(people); // restart app
@@ -32,7 +32,7 @@ function app(people) {
 function traitToSearchBy(people) {
   let searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
   let foundPeople;
-  let foundPeopleObjectsArray;
+  let foundPeopleObjectsArray = [];
   let count = 0;
 
   while (searchType != "Done" || count == 5) {
@@ -67,7 +67,19 @@ function traitToSearchBy(people) {
     }
     searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
     count++;
-    foundPeopleObjectsArray += foundPeople;
+    foundPeopleObjectsArray = foundPeopleObjectsArray.concat(foundPeople);
+    // foundPeopleObjectsArray = foundPeopleObjectsArray.filter(function (element) {
+    //   for (let i = 0; i < element.length; i++) {
+    //     for (let j = 0; j < element.length; i++) {
+    //       if (element[i].firstname != element[j].firstName && felement[i].lastname != element[j].lastName) {
+    //         return true;
+    //       }
+    //       else {
+    //         return false;
+    //       }
+    //     }
+    //   }
+    // });
 
   }
 }
