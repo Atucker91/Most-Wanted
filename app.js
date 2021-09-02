@@ -17,10 +17,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-<<<<<<< HEAD
-=======
       // TODO: search by traits 
->>>>>>> 1f4e81dcc5a14a08d5607f6dfa4a12b8f12d75ba
       searchResults = traitToSearchBy(people);
       break;
     default:
@@ -39,7 +36,7 @@ function traitToSearchBy(people) {
   let foundPeopleObjectsArray = [];
   let count = 0;
 
-  while (searchType != "Done" || count == 5) {
+  while(searchType != "Done" || count > 4) {
 
     switch (searchType) {
       case 'Gender':
@@ -143,7 +140,7 @@ function searchByName(people) {
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return displayPerson(foundPerson);
+  return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
