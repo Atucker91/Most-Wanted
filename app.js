@@ -32,30 +32,31 @@ function app(people) {
 
 function traitToSearchBy(people) {
   let searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
-  let foundPeople;
-  let foundPeopleObjectsArray = [];
-  let count = 0;
+  let foundPeople = people;
 
-  while(searchType != "Done" || count > 4) {
+  for (let i = 0; i < 5; i++) {
+    if (searchType === "Done") {
+      break;
+    }
 
     switch (searchType) {
       case 'Gender':
-        foundPeople = searchByGender(people);
+        foundPeople = searchByGender(foundPeople);
         break;
       case 'DOB':
 
         break;
       case 'Height':
-        foundPeople = searchByHeight(people);
+        foundPeople = searchByHeight(foundPeople);
         break;
       case 'Weight':
-        foundPeople = searchByWeight(people);
+        foundPeople = searchByWeight(foundPeople);
         break;
       case 'Eye Color':
-        foundPeople = searchByEyeColor(people);
+        foundPeople = searchByEyeColor(foundPeople);
         break;
       case 'Occupation':
-        foundPeople = searchByOccupation(people);
+        foundPeople = searchByOccupation(foundPeople);
         break;
       case 'Parents':
         break;
@@ -63,30 +64,14 @@ function traitToSearchBy(people) {
         break;
 
       default:
-        traitToSearchBy(people); // restart app
+        traitToSearchBy(foundPeople); // restart app
         break;
     }
+
     searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
-    count++;
-    foundPeopleObjectsArray = foundPeopleObjectsArray.concat(foundPeople);
-    // foundPeopleObjectsArray = foundPeopleObjectsArray.filter(function (element) {
-    //   for (let i = 0; i < element.length; i++) {
-    //     for (let j = 0; j < element.length; i++) {
-    //       if (element[i].firstname != element[j].firstName && felement[i].lastname != element[j].lastName) {
-    //         return true;
-    //       }
-    //       else {
-    //         return false;
-    //       }
-    //     }
-    //   }
-    // });
 
   } 
 }
-
-
-
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
 
