@@ -1,4 +1,4 @@
-"use strict"
+// "use strict"
 
 
 //Menu functions.
@@ -32,6 +32,7 @@ function app(people) {
 function traitToSearchBy(people) {
   let searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
   let foundPeople = people;
+  
 
   for (let i = 0; i < 5; i++) {
     if (searchType === "done") {
@@ -57,12 +58,12 @@ function traitToSearchBy(people) {
       case 'occupation':
         foundPeople = searchByOccupation(foundPeople);
         break;
-      case 'parents':
-        foundPeople = searchByParents(foundPeople);
-        break;
-      case 'current spouse':
-        foundPeople = searchByCurrentSpouse(foundPeople);
-        break;
+      // // case 'parents':
+      // //   foundPeople = searchByParents(foundPeople);
+      // //   break;
+      // // case 'current spouse':
+      // //   foundPeople = searchByCurrentSpouse(foundPeople);
+      //   break;
 
       default:
         traitToSearchBy(foundPeople); // restart app
@@ -104,7 +105,7 @@ function mainMenu(person, people) {
       displayPerson(person);
       break;
     case "family":
-      displayFamily(person);
+      displayFamily(people);
       break;
     case "descendants":
       displayDescendants(person);
@@ -227,27 +228,57 @@ function searchByDOB(people) {
 
 }
 
-//placeholder
-function searchByParents(people) {
-  let parents;
-  let foundPerson;
-  return foundPerson;
-}
-
-//placeholder 
-function searchByCurrentSpouse(people) {
-  let currentSpouse = promptFor("Who is the persons spouse?", autoValid);
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.currentSpouse === currentSpouse) {
+function findParents (people, person){
+  let parents = people.filter(function(e){
+    if(e.id == person.parents[0] || e.id == person.parents[1]){
       return true;
-    } else {
+    }
+    else {
       return false;
     }
   });
-
-  return foundPerson;
+  return parents;
 }
-//TODO: add other trait filter functions here.
+
+function findSpouse (people, person){
+  let spouse = people.filter(function(e){
+    if(e.id == person.currentSpouse){
+      return true;
+    }
+  });
+  return spouse;
+}
+
+function findDescendants (people, person){
+  let descendants = people.filter(function(e){
+    for(let i = 0; i < e.parents.length; i++){
+      if(person.id == e.parents[i]){
+        return true;
+      }
+    }
+  });
+  for(let i = 0; i < descendants.length; i++){
+    descendants = descendants.concat(findDescendants(people, descendants[i]));
+  }
+  return descendants;
+}
+
+function findSiblings (people, person){
+  let siblings = people.filter(function(e){
+    for(let i = 0; i < e.parents.length; i++){
+      if(person.parents[0] == e.parents[i] && person.id != e.id){
+        return true;
+      }
+      if(person.parents[1] == e.parents[i] && person.id != e.id){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  });
+  return siblings;
+}
 
 
 
@@ -282,13 +313,15 @@ function displayPerson(person) {
   alert(personInfo);
 }
 
+//unf. function for displaying person family members
+function displayFamily (people){
+  let parents = findParents(people, person);
+  let spouse = findSpouse(people, person);
+  let siblings = findSiblings(people, person);
 
-//siblings = .parents / unfinshed function / placeholder
-function displayFamily(person) {
-  let familyInfo = "Parents: " + person[0].parents + "\n";
-  familyInfo += "Current Spouse: " + person[0].currentSpouse + "\n";
-  alert(familyInfo);
+  
 }
+
 
 //descendants - unfinished function / placeholder
 function displayDescendants(person) {
@@ -341,5 +374,4 @@ function customValidation(input) {
 }
 
 //#endregion
-
-
+  
