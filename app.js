@@ -44,7 +44,7 @@ function traitToSearchBy(people) {
         foundPeople = searchByGender(foundPeople);
         break;
       case 'DOB':
-
+        foundPeople = searchByDOB(foundPeople);
         break;
       case 'Height':
         foundPeople = searchByHeight(foundPeople);
@@ -59,8 +59,10 @@ function traitToSearchBy(people) {
         foundPeople = searchByOccupation(foundPeople);
         break;
       case 'Parents':
+        foundPeople = searchByParents(foundPeople);
         break;
       case 'Current Spouse':
+        foundPeople = searchByCurrentSpouse(foundPeople);
         break;
 
       default:
@@ -71,10 +73,10 @@ function traitToSearchBy(people) {
     searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
 
   }
+
+  displayPeople(foundPeople);
+
 }
-
-
-
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
 
@@ -92,10 +94,10 @@ function mainMenu(person, people) {
       displayPerson(person);
       break;
     case "family":
-      // TODO: get person's family
+      displayFamily(person);
       break;
     case "descendants":
-      // TODO: get person's descendants
+      displayDescendants(person);
       break;
     case "restart":
       app(people); // restart
@@ -128,7 +130,7 @@ function searchByName(people) {
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return displayPerson(foundPerson);
+  return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -143,7 +145,7 @@ function searchByEyeColor(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 
 }
 
@@ -158,7 +160,7 @@ function searchByGender(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 
 }
 
@@ -172,7 +174,7 @@ function searchByHeight(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 
 function searchByWeight(people) {
@@ -185,7 +187,7 @@ function searchByWeight(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
 }
 
 function searchByOccupation(people) {
@@ -198,7 +200,42 @@ function searchByOccupation(people) {
       return false;
     }
   });
-  return displayPeople(foundPerson);
+  return foundPerson;
+}
+
+function searchByDOB(people) {
+  let dob = promptFor("What is the persons date of birth?", autoValid);
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.dob === dob) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return foundPerson;
+
+}
+
+//placeholder
+function searchByParents(people) {
+  let parents;
+  let foundPerson;
+  return foundPerson;
+}
+
+//placeholder 
+function searchByCurrentSpouse(people) {
+  let currentSpouse = promptFor("Who is the persons spouse?", autoValid);
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.currentSpouse === currentSpouse) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  return foundPerson;
 }
 //TODO: add other trait filter functions here.
 
@@ -235,6 +272,19 @@ function displayPerson(person) {
   alert(personInfo);
 }
 
+
+//siblings = .parents / unfinshed function / placeholder
+function displayFamily(person) {
+  let familyInfo = "Parents: " + person[0].parents + "\n";
+  familyInfo += "Current Spouse: " + person[0].currentSpouse + "\n";
+  alert(familyInfo);
+}
+
+//descendants - unfinished function / placeholder
+function displayDescendants(person) {
+  let descendants;
+  alert(descendants);
+}
 //#endregion
 
 
