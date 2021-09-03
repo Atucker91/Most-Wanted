@@ -34,7 +34,7 @@ function traitToSearchBy(people) {
   let foundPeople = people;
   
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 4; i++) {
     if (searchType === "done") {
       break;
     }
@@ -66,6 +66,7 @@ function traitToSearchBy(people) {
       //   break;
 
       default:
+        alert("Invalid option, try again");
         traitToSearchBy(foundPeople); // restart app
         break;
     }
@@ -146,7 +147,7 @@ function searchByName(people) {
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people) {
-  let eyeColor = promptFor("What is the person's eye color?", autoValid);
+  let eyeColor = promptFor("What is the person's eye color?", customValidationEyes);
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.eyeColor === eyeColor) {
@@ -161,7 +162,7 @@ function searchByEyeColor(people) {
 }
 
 function searchByGender(people) {
-  let gender = promptFor("What is the person's gender?", autoValid);
+  let gender = promptFor("What is the person's gender?", customValidationGender);
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.gender === gender) {
@@ -176,7 +177,7 @@ function searchByGender(people) {
 }
 
 function searchByHeight(people) {
-  let height = promptFor("What is the person's height?", autoValid);
+  let height = promptFor("What is the person's height?", customValidationHeight);
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.height == height) {
       return true;
@@ -189,7 +190,7 @@ function searchByHeight(people) {
 }
 
 function searchByWeight(people) {
-  let weight = promptFor("How much does the person weigh?", autoValid);
+  let weight = promptFor("How much does the person weigh?", customValidationWeight);
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.weight == weight) {
       return true;
@@ -202,7 +203,7 @@ function searchByWeight(people) {
 }
 
 function searchByOccupation(people) {
-  let occupation = promptFor("What does the person do for a living?", autoValid);
+  let occupation = promptFor("What does the person do for a living?", customValidationOccupation);
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.occupation === occupation) {
       return true;
@@ -215,7 +216,7 @@ function searchByOccupation(people) {
 }
 
 function searchByDOB(people) {
-  let dob = promptFor("What is the persons date of birth?", autoValid);
+  let dob = promptFor("What is the persons date of birth?", customValidationDob);
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.dob === dob) {
       return true;
@@ -367,11 +368,67 @@ function autoValid(input) {
   return true; // default validation only
 }
 
-//Unfinished validation function you can use for any of your custom validation callbacks.
-//can be used for things like eye color validation for example.
-function customValidation(input) {
-
+//Validation functions for attribute searches
+function customValidationEyes(input) {
+  if (input.toLowerCase() == "brown" || input.toLowerCase() == "black" || input.toLowerCase() == "hazel" || input.toLowerCase() == "blue" || input.toLowerCase() == "green") {
+    return true;
+  }
+  else {
+    alert("Not a correct eye color, try again");
+    return false;
+  }
 }
 
+function customValidationGender(input) {
+  if (input.toLowerCase() == "male" || input.toLowerCase() == "female") {
+    return true;
+  }
+  else {
+    alert("Not a correct gender, try again");
+    return false;
+  }
+}
+
+function customValidationWeight(input) {
+  input = parseInt(input, 10);
+  if (input > 256 || input < 100) {
+    alert("Weight entered is too high or low, try again");
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function customValidationHeight(input) {
+  input = parseInt(input, 10);
+  if (input > 76 || input < 58) {
+    alert("Height entered is too high or low, try again");
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function customValidationOccupation(input) {
+  if (input.toLowerCase() == "programmer" || input.toLowerCase() == "assistant" || input.toLowerCase() == "landscaper" || input.toLowerCase() == "nurse" || input.toLowerCase() == "student" || input.toLowerCase() == "architect" || input.toLowerCase() == "doctor" || input.toLowerCase() == "politician") {
+    return true;
+  }
+  else {
+    alert("Not a correct occupation, try again");
+    return false;
+  }
+}
+
+function customValidationDob(input) {
+  if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(input)) {
+    alert("Not in correct date format (MM/DD/YYYY), try again");
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 //#endregion
   
