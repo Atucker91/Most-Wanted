@@ -70,14 +70,7 @@ function traitToSearchBy(people) {
 
     searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
 
-<<<<<<< HEAD
   }
-
-  displayPeople(foundPeople);
-
-=======
-  } 
->>>>>>> 419c44b70a9aa758e0ae1fae4ff5246f71ca85d7
 }
 
 
