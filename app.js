@@ -17,7 +17,6 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits 
       searchResults = traitToSearchBy(people);
       break;
     default:
@@ -31,37 +30,37 @@ function app(people) {
 
 
 function traitToSearchBy(people) {
-  let searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
+  let searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
   let foundPeople = people;
 
   for (let i = 0; i < 5; i++) {
-    if (searchType === "Done") {
+    if (searchType === "done") {
       break;
     }
 
     switch (searchType) {
-      case 'Gender':
+      case 'gender':
         foundPeople = searchByGender(foundPeople);
         break;
-      case 'DOB':
-      foundPeople = searchByDOB(foundPeople);
+      case 'dob':
+        foundPeople = searchByDOB(foundPeople);
         break;
-      case 'Height':
+      case 'height':
         foundPeople = searchByHeight(foundPeople);
         break;
-      case 'Weight':
+      case 'weight':
         foundPeople = searchByWeight(foundPeople);
         break;
-      case 'Eye Color':
+      case 'eye color':
         foundPeople = searchByEyeColor(foundPeople);
         break;
-      case 'Occupation':
+      case 'occupation':
         foundPeople = searchByOccupation(foundPeople);
         break;
-      case 'Parents':
+      case 'parents':
         foundPeople = searchByParents(foundPeople);
         break;
-      case 'Current Spouse':
+      case 'current spouse':
         foundPeople = searchByCurrentSpouse(foundPeople);
         break;
 
@@ -70,13 +69,24 @@ function traitToSearchBy(people) {
         break;
     }
 
-    searchType = prompt("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.");
+    searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
 
-  } 
+  }
 
   displayPeople(foundPeople);
-  
+  let outcome = promptFor("Is the person you are looking for on the previous list?\n Enter 'yes' or 'no'", yesNo).toLowerCase();
+
+  if (outcome == "yes") {
+    return searchByName(people);
+  }
+  else {
+    alert("Try searching with more/different traits");
+    traitToSearchBy(people);
+  }
+
+
 }
+
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
 
@@ -167,7 +177,7 @@ function searchByGender(people) {
 function searchByHeight(people) {
   let height = promptFor("What is the person's height?", autoValid);
   let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.height === height) {
+    if (potentialMatch.height == height) {
       return true;
     }
     else {
@@ -180,7 +190,7 @@ function searchByHeight(people) {
 function searchByWeight(people) {
   let weight = promptFor("How much does the person weigh?", autoValid);
   let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.weight === weight) {
+    if (potentialMatch.weight == weight) {
       return true;
     }
     else {
@@ -203,10 +213,10 @@ function searchByOccupation(people) {
   return foundPerson;
 }
 
-function searchByDOB (people) {
+function searchByDOB(people) {
   let dob = promptFor("What is the persons date of birth?", autoValid);
-  let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.dob === dob) {
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.dob === dob) {
       return true;
     }
     else {
@@ -214,28 +224,28 @@ function searchByDOB (people) {
     }
   });
   return foundPerson;
-  
+
 }
 
 //placeholder
-function searchByParents (people) {
+function searchByParents(people) {
   let parents;
   let foundPerson;
-return foundPerson;
+  return foundPerson;
 }
 
 //placeholder 
-function searchByCurrentSpouse (people) {
-    let currentSpouse = promptFor("Who is the persons spouse?", autoValid);
-    let foundPerson = people.filter(function(potentialMatch){
-      if(potentialMatch.currentSpouse === currentSpouse) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    
-    return foundPerson;
+function searchByCurrentSpouse(people) {
+  let currentSpouse = promptFor("Who is the persons spouse?", autoValid);
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.currentSpouse === currentSpouse) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  return foundPerson;
 }
 //TODO: add other trait filter functions here.
 
@@ -274,14 +284,14 @@ function displayPerson(person) {
 
 
 //siblings = .parents / unfinshed function / placeholder
-function displayFamily(person){
+function displayFamily(person) {
   let familyInfo = "Parents: " + person[0].parents + "\n";
   familyInfo += "Current Spouse: " + person[0].currentSpouse + "\n";
   alert(familyInfo);
 }
 
 //descendants - unfinished function / placeholder
-function displayDescendants(person){
+function displayDescendants(person) {
   let descendants;
   alert(descendants);
 }
