@@ -32,7 +32,7 @@ function app(people) {
 function traitToSearchBy(people) {
   let searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
   let foundPeople = people;
-  
+
 
   for (let i = 0; i < 4; i++) {
     if (searchType === "done") {
@@ -103,7 +103,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      displayPerson(person);
+      displayPerson(people, person);
       break;
     case "family":
       displayFamily(people);
@@ -229,9 +229,10 @@ function searchByDOB(people) {
 
 }
 
-function findParents (people, person){
-  let parents = people.filter(function(e){
-    if(e.id == person.parents[0] || e.id == person.parents[1]){
+function findParents(people, person) {
+
+  let parents = people.filter(function (e) {
+    if (e.id == person[0].parents[0] || e.id == person[0].parents[1]) {
       return true;
     }
     else {
@@ -241,39 +242,39 @@ function findParents (people, person){
   return parents;
 }
 
-function findSpouse (people, person){
-  let spouse = people.filter(function(e){
-    if(e.id == person.currentSpouse){
+function findSpouse(people, person) {
+  let spouse = people.filter(function (e) {
+    if (e.id == person[0].currentSpouse) {
       return true;
     }
   });
   return spouse;
 }
 
-function findDescendants (people, person){
-  let descendants = people.filter(function(e){
-    for(let i = 0; i < e.parents.length; i++){
-      if(person.id == e.parents[i]){
+function findDescendants(people, person) {
+  let descendants = people.filter(function (e) {
+    for (let i = 0; i < e.parents.length; i++) {
+      if (person.id == e.parents[i]) {
         return true;
       }
     }
   });
-  for(let i = 0; i < descendants.length; i++){
+  for (let i = 0; i < descendants.length; i++) {
     descendants = descendants.concat(findDescendants(people, descendants[i]));
   }
   return descendants;
 }
 
-function findSiblings (people, person){
-  let siblings = people.filter(function(e){
-    for(let i = 0; i < e.parents.length; i++){
-      if(person.parents[0] == e.parents[i] && person.id != e.id){
+function findSiblings(people, person) {
+  let siblings = people.filter(function (e) {
+    for (let i = 0; i < e.parents.length; i++) {
+      if (person.parents[0] == e.parents[i] && person.id != e.id) {
         return true;
       }
-      if(person.parents[1] == e.parents[i] && person.id != e.id){
+      if (person.parents[1] == e.parents[i] && person.id != e.id) {
         return true;
       }
-      else{
+      else {
         return false;
       }
     }
@@ -297,9 +298,10 @@ function displayPeople(people) {
   }).join("\n"));
 }
 
-function displayPerson(person) {
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
+function displayPerson(people, person) {
+  let parents = findParents(people, person);
+  let spouse = findSpouse(people, person);
+
   let personInfo = "First Name: " + person[0].firstName + "\n";
   personInfo += "Last Name: " + person[0].lastName + "\n";
   personInfo += "Gender: " + person[0].gender + "\n";
@@ -308,19 +310,19 @@ function displayPerson(person) {
   personInfo += "Weight: " + person[0].weight + "\n";
   personInfo += "Eye Color: " + person[0].eyeColor + "\n";
   personInfo += "Occupation: " + person[0].occupation + "\n";
-  personInfo += "Parents: " + person[0].parents + "\n";
-  personInfo += "Current Spouse: " + person[0].currentSpouse + "\n";
-  // TODO: finish getting the rest of the information to display.
+  personInfo += "Parents: " + parents[0].firstName + parents[0].lastName + ", " + parents[1].firstName + parents[1].lastName + "\n";
+  personInfo += "Current Spouse: " + spouse[0].firstName + spouse[0].lastName + "\n";
+
   alert(personInfo);
 }
 
 //unf. function for displaying person family members
-function displayFamily (people){
+function displayFamily(people) {
   let parents = findParents(people, person);
   let spouse = findSpouse(people, person);
   let siblings = findSiblings(people, person);
 
-  
+
 }
 
 
@@ -431,4 +433,4 @@ function customValidationDob(input) {
   }
 }
 //#endregion
-  
+
