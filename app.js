@@ -96,7 +96,7 @@ let personsInfo;
 
   switch (displayOption) {
     case "info":
-      displayPerson(people, person);
+      personsInfo = displayPerson(person);
       break;
     case "family":
       personsInfo = displayFamily(person, people);
