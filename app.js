@@ -32,7 +32,7 @@ function app(people) {
 function traitToSearchBy(people) {
   let searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
   let foundPeople = people;
-  
+
 
   for (let i = 0; i < 4; i++) {
     if (searchType === "done") {
@@ -103,7 +103,7 @@ let personsInfo;
 
   switch (displayOption) {
     case "info":
-      displayPerson(person);
+      displayPerson(people, person);
       break;
     case "family":
       personsInfo = displayFamily(person, people);
@@ -465,4 +465,4 @@ function customValidationDob(input) {
   }
 }
 //#endregion
-  
+
