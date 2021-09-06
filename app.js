@@ -30,7 +30,7 @@ function app(people) {
 
 
 function traitToSearchBy(people) {
-  let searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
+  let searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
   let foundPeople = people;
 
 
@@ -58,13 +58,6 @@ function traitToSearchBy(people) {
       case 'occupation':
         foundPeople = searchByOccupation(foundPeople);
         break;
-      // // case 'parents':
-      // //   foundPeople = searchByParents(foundPeople);
-      // //   break;
-      // // case 'current spouse':
-      // //   foundPeople = searchByCurrentSpouse(foundPeople);
-      //   break;
-
       default:
         alert("Invalid option, try again");
         traitToSearchBy(foundPeople); // restart app
