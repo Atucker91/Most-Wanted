@@ -96,7 +96,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      displayPerson(people, person);
+      personsInfo = displayPerson(person);
       break;
     case "family":
       personsInfo = displayFamily(person, people);
