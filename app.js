@@ -64,7 +64,7 @@ function traitToSearchBy(people) {
         break;
     }
 
-    searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n Parents \n Current Spouse \n Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
+    searchType = promptFor("Enter a trait to search for from these attributes: \n Gender \n DOB \n Height \n Weight \n Eye Color \n Occupation \n  Up to 5 traits can be entered.  \n Enter 'Done' when you have no more traits to enter.", autoValid).toLowerCase();
 
   }
 
@@ -367,13 +367,6 @@ function displayDescendants(person, people) {
   alert(display);
 
 }
-
-// function displayDescendants(person, people) {
-//   let children = getDescendants(person, people);
-//   alert(people.map(function (person) {
-//     return person.firstName + " " + person.lastName;
-//   }).join("\n"));
-// }
 
 
 function getDescendants(person, people) {
